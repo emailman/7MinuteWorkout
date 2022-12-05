@@ -2,4 +2,6 @@
     <string name="app_name">7 Minute Workout</string>
     <string name="start">START</string>
     <string name="my_image_view">My Image View</string>
+    <string name="get_ready_for">GET READY FOR</string>
+    <string name="_10">10</string>
 </resources>
