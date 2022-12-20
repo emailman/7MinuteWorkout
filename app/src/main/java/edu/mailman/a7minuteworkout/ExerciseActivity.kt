@@ -1,8 +1,11 @@
 package edu.mailman.a7minuteworkout
 
+import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.speech.tts.TextToSpeech
 import android.view.View
 import android.widget.Toast
 import edu.mailman.a7minuteworkout.databinding.ActivityExerciseBinding
@@ -19,6 +22,10 @@ class ExerciseActivity : AppCompatActivity() {
 
     private var exerciseList: ArrayList<ExerciseModel>? = null
     private var currentExercisePosition = -1
+
+    private var tts: TextToSpeech? = null
+
+    private var player: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +67,18 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun setupExerciseView() {
+        try {
+            val soundURI = Uri.parse(
+                "android.resource://edu.mailman.a7minuteworkout/" +
+                        R.raw.press_start)
+            player = MediaPlayer.create(applicationContext, soundURI)
+            player?.isLooping = false
+            player?.start()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         binding?.flRestView?.visibility = View.INVISIBLE
         binding?.tvTitle?.visibility = View.INVISIBLE
         binding?.tvExerciseName?.visibility = View.VISIBLE
@@ -67,7 +86,6 @@ class ExerciseActivity : AppCompatActivity() {
         binding?.ivImage?.visibility = View.VISIBLE
         binding?.tvUpcomingLabel?.visibility = View.INVISIBLE
         binding?.tvUpcomingExerciseName?.visibility = View.INVISIBLE
-
 
         if (exerciseTimer != null) {
             exerciseTimer?.cancel()
@@ -128,6 +146,15 @@ class ExerciseActivity : AppCompatActivity() {
         if (exerciseTimer != null) {
             exerciseTimer?.cancel()
             exerciseProgress = 0
+        }
+
+        if (tts != null) {
+            tts!!.stop()
+            tts!!.shutdown()
+        }
+
+        if (player != null) {
+            player!!.stop()
         }
 
         binding = null
