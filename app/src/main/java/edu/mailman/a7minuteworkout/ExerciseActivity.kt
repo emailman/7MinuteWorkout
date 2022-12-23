@@ -121,6 +121,9 @@ class ExerciseActivity : AppCompatActivity() {
 
             override fun onFinish() {
                 currentExercisePosition++
+                exerciseList!![currentExercisePosition].setIsSelected(true)
+                exerciseAdapter!!.notifyDataSetChanged()
+
                 setupExerciseView()
             }
         }.start()
@@ -137,6 +140,10 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
+                exerciseList!![currentExercisePosition].setIsSelected(false)
+                exerciseList!![currentExercisePosition].setIsCompleted(true)
+
+                exerciseAdapter!!.notifyDataSetChanged()
                 if (currentExercisePosition < exerciseList?.size!! - 1) {
                     setupRestView()
                 } else {
