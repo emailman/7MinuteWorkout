@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import edu.mailman.a7minuteworkout.databinding.ActivityExerciseBinding
 import edu.mailman.a7minuteworkout.databinding.ItemExerciseStatusBinding
 
 class ExerciseStatusAdapter(val items: ArrayList<ExerciseModel>):
@@ -34,7 +33,7 @@ class ExerciseStatusAdapter(val items: ArrayList<ExerciseModel>):
             model.getIsCompleted() -> {
                 holder.tvItem.background =
                     ContextCompat.getDrawable(holder.itemView.context,
-                        R.drawable.item_circular_accent_background)
+                        R.drawable.item_circular_color_accent_background)
                 holder.tvItem.setTextColor(Color.parseColor("#FFFFFF"))
             }
             else -> {

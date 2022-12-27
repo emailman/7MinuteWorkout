@@ -55,7 +55,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:background="@drawable/item_circular_accent_background"
+            android:background="@drawable/item_circular_color_accent_background"
             android:gravity="center" >
             <TextView
                 android:id="@+id/tvTimer"
@@ -149,7 +149,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:background="@drawable/item_circular_accent_background"
+            android:background="@drawable/item_circular_color_accent_background"
             android:gravity="center" >
             <TextView
                 android:id="@+id/tvTimerExercise"
