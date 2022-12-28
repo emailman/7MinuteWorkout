@@ -64,6 +64,7 @@
             android:id="@+id/tvYourBMI"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/your_bmi"
             android:textAllCaps="true"
             android:textSize="16sp" />

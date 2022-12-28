@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import edu.mailman.a7minuteworkout.databinding.ActivityBmiBinding
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 class BMIActivity : AppCompatActivity() {
     private var binding: ActivityBmiBinding? = null
@@ -47,43 +45,51 @@ class BMIActivity : AppCompatActivity() {
         val bmiLabel: String
         val bmiDescription: String
 
-        if (bmi.compareTo(15f) <= 0) {
-            // BMI is less than 15
-            bmiLabel = "You are very severely underweight"
-            bmiDescription = "You really need to eat more"
-        }  else if (bmi.compareTo(15f) > 0 && bmi.compareTo(16f) <= 0){
-            // BMI is between 15 and 16
-            bmiLabel = "You are severely underweight"
-            bmiDescription = "You really need to eat more"
-        } else if (bmi.compareTo(16f) > 0 && bmi.compareTo(18.5f) <= 0) {
-            // BMI is between 16 and 18.5
-            bmiLabel = "You are underweight"
-            bmiDescription = "You really need to eat more"
-        } else if (bmi.compareTo(18.5f) > 0 && bmi.compareTo(25f) <= 0) {
-            // BMI is between 18.5 and 25
-            bmiLabel = "Normal"
-            bmiDescription = "You are in good shape"
-        }else if (bmi.compareTo(25f) > 0 && bmi.compareTo(30f) <= 0) {
-            // BMI is between 25 and 30
-            bmiLabel = "You are overweight"
-            bmiDescription = "You really need to workout more"
-        } else if (bmi.compareTo(30f) > 0 && bmi.compareTo(35f) <= 0) {
-            // BMI is between 30 and 35
-            bmiLabel = "You are moderately obese"
-            bmiDescription = "You really need to workout more"
-        }  else if (bmi.compareTo(35f) > 0 && bmi.compareTo(40f) <= 0){
-            // BMI is between 35 and 40
-            bmiLabel = "You are severely obese"
-            bmiDescription = "This is a dangerous condition!"
-        } else {
-            // BMI is over 40
-            bmiLabel = "You are very severely obese"
-            bmiDescription = "This is a dangerous condition"
+        val roundedBMI = "%.1f".format(bmi).toFloat()
+        when (roundedBMI) {
+            in 0F .. 14.99F -> {
+                // BMI is less than 15
+                bmiLabel = "You are very severely underweight"
+                bmiDescription = "You really need to eat more"
+            }
+            in 15F .. 15.99F -> {
+                // BMI is between 15 and 16
+                bmiLabel = "You are severely underweight"
+                bmiDescription = "You really need to eat more"
+            }
+            in 16F .. 18.49F -> {
+                // BMI is between 16 and 18.5
+                bmiLabel = "You are underweight"
+                bmiDescription = "You really need to eat more"
+            }
+            in 18.5F .. 24.99F -> {
+                // BMI is between 18.5 and 25
+                bmiLabel = "Normal"
+                bmiDescription = "You are in good shape"
+            }
+            in 25F .. 29.99F -> {
+                // BMI is between 25 and 30
+                bmiLabel = "You are overweight"
+                bmiDescription = "You really need to workout more"
+            }
+            in 30F .. 34.99F -> {
+                // BMI is between 30 and 35
+                bmiLabel = "You are moderately obese"
+                bmiDescription = "You really need to workout more"
+            }
+            in 35F .. 39.99F -> {
+                // BMI is between 35 and 40
+                bmiLabel = "You are severely obese"
+                bmiDescription = "This is a dangerous condition!"
+            }
+            else -> {
+                // BMI is over 40
+                bmiLabel = "You are very severely obese"
+                bmiDescription = "This is a dangerous condition"
+            }
         }
 
-        val bmiValue = BigDecimal(bmi.toDouble()).setScale(2,
-            RoundingMode.HALF_EVEN).toString()
-
+        val bmiValue = "%.1f".format(bmi)
         binding?.llDisplayBMIResult?.visibility = View.VISIBLE
         binding?.tvBMIValue?.text = bmiValue
         binding?.tvBMIType?.text = bmiLabel
@@ -91,13 +97,13 @@ class BMIActivity : AppCompatActivity() {
     }
 
     private fun validateMetricUnits(): Boolean {
-        var isValid = true
-
-        if (binding?.etMetricUnitWeight?.toString()!!.isEmpty()) {
-            isValid = false
-        } else if (binding?.etMetricUnitHeight?.toString()!!.isEmpty()) {
-            isValid = false
-        }
-        return isValid
+        return !(binding?.etMetricUnitWeight?.text.toString().isEmpty() ||
+                binding?.etMetricUnitHeight?.text.toString().isEmpty())
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
+
 }
