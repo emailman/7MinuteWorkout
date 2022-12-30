@@ -23,7 +23,7 @@
     <string name="calculate">CALCULATE</string>
     <string name="metric_units">METRIC UNITS</string>
     <string name="us_units">US UNITS</string>
-    <string name="feet">Feet</string>
+    <string name="feet">feet</string>
     <string name="weight_in_lb">WEIGHT (in lb)</string>
     <string name="inches">inches</string>
 </resources>
