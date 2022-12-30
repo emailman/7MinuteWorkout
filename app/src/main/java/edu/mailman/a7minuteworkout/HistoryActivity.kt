@@ -19,6 +19,7 @@ class HistoryActivity : AppCompatActivity() {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             supportActionBar?.title = "HISTORY"
         }
+
         binding?.toolbarHistoryActivity?.setNavigationOnClickListener {
             onBackPressed()
         }
