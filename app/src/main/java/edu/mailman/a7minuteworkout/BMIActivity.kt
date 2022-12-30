@@ -28,7 +28,7 @@ class BMIActivity : AppCompatActivity() {
         }
 
         binding?.tlbBmiActivity?.setNavigationOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
         makeVisibleMetricUnitsView()

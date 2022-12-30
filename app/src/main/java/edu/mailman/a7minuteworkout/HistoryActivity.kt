@@ -21,7 +21,7 @@ class HistoryActivity : AppCompatActivity() {
         }
 
         binding?.toolbarHistoryActivity?.setNavigationOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 }
