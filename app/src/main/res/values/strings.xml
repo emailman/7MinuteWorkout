@@ -26,4 +26,5 @@
     <string name="feet">feet</string>
     <string name="weight_in_lb">WEIGHT (in lb)</string>
     <string name="inches">inches</string>
+    <string name="history">History</string>
 </resources>
