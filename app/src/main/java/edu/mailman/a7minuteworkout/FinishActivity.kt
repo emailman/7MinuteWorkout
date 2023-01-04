@@ -24,7 +24,7 @@ class FinishActivity  : AppCompatActivity() {
         }
 
         binding?.toolbarFinishActivity?.setNavigationOnClickListener{
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
         binding?.btnFinish?.setOnClickListener {
