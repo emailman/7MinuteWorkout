@@ -27,4 +27,6 @@
     <string name="weight_in_lb">WEIGHT (in lb)</string>
     <string name="inches">inches</string>
     <string name="history">History</string>
+    <string name="exercises_completed">EXERCISES COMPLETED</string>
+    <string name="no_data_available">NO DATA AVAILABLE</string>
 </resources>

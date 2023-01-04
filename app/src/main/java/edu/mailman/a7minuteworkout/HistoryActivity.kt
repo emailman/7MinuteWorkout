@@ -2,8 +2,9 @@ package edu.mailman.a7minuteworkout
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import edu.mailman.a7minuteworkout.databinding.ActivityHistoryBinding
 import kotlinx.coroutines.launch
 
@@ -34,8 +35,25 @@ class HistoryActivity : AppCompatActivity() {
     private fun getAllCompletedDates(historyDAO: HistoryDAO) {
         lifecycleScope.launch {
             historyDAO.fetchAllDates().collect { allCompletedDatesList ->
-                for (i in allCompletedDatesList) {
-                    Log.i("Date: ", "" + i.date)
+                if (allCompletedDatesList.isNotEmpty()) {
+                    binding?.tvHistory?.visibility = View.VISIBLE
+                    binding?.rvHistory?.visibility = View.VISIBLE
+                    binding?.tvNoDataAvailable?.visibility = View.INVISIBLE
+
+                    binding?.rvHistory?.layoutManager =
+                        LinearLayoutManager(this@HistoryActivity)
+
+                    val dates = ArrayList<String>()
+                    for (date_ in allCompletedDatesList) {
+                        dates.add(date_.date)
+                    }
+
+                    val historyAdapter = HistoryAdapter(dates)
+                    binding?.rvHistory?.adapter = historyAdapter
+                } else {
+                    binding?.tvHistory?.visibility = View.GONE
+                    binding?.rvHistory?.visibility = View.GONE
+                    binding?.tvNoDataAvailable?.visibility = View.VISIBLE
                 }
             }
         }
